@@ -10,9 +10,9 @@ Function ResetBoard { # Set playing board to default values
     Return $Board
 }
 
-Function CheckWin($Board, $Player) { # Look at the current plays on for if current player has won
+Function CheckWin($Board, $Player) { # Check if current player has won
     $Array = @()
-    $Spot = 0
+    $Spot = 0 # Counter used for location in Board array
     $Win = $False
     foreach ($Item in $Board) { # Loop to find players mark
         If ($Item -eq $Player) { # If players mark is found make note of the location
@@ -35,8 +35,7 @@ Function CheckWin($Board, $Player) { # Look at the current plays on for if curre
 
 $Board = ResetBoard
 $Turn = 0 # Counter used to determine whose turn it is
-$Input = 99
-While ($Turn -le 9)
+While ($Turn -le 8)
 {
     clear-host
     write-host "`r`nTic Tac Toe`r`n" $Board
@@ -111,11 +110,10 @@ While ($Turn -le 9)
                 $Turn++
             } 
         }
-        0 { }
     }
-    if ((CheckWin $Board $Player)-eq $True) { $Turn = 90 }
+    if ((CheckWin $Board $Player)-eq $True) { $Turn = 90 } # If Returns true Player won by three in a row
 }
-If ($Turn -eq 90) {
+If ($Turn -eq 90) { # Check if you win by Three in a row or if cats game
     write-host "$Player Wins!"
 }
 else {
